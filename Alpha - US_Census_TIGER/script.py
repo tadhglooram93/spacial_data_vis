@@ -3,7 +3,6 @@ import pygris as pg
 import matplotlib.pyplot as plt
 from matplotlib_scalebar.scalebar import ScaleBar
 from pygris.utils import shift_geometry
-from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet
