@@ -36,7 +36,7 @@ Get TIGER layer for NY rails
 rails = pg.rails(year=2022).to_crs(32619)
 rails = shift_geometry(rails)
 #load the rails name from the csv files
-ny_rails_names = pd.read_csv("./assignments/Alpha - US_Census_TIGER/ny_rails.csv",dtype={
+ny_rails_names = pd.read_csv("./Alpha - US_Census_TIGER/ny_rails.csv",dtype={
     'OID': 'string'})
 #convert the names to a list
 OID = ny_rails_names['OID'].unique().tolist()
@@ -108,7 +108,8 @@ plt.title('New York State Map with Roads and Rails as of 2022', fontsize=15)
 ax.set_axis_off()
 
 # Save the plot as a PDF
-plt.savefig('./assignments/Alpha - US_Census_TIGER/output/NY_map_roads_rails.pdf')
+plt.savefig('./Alpha - US_Census_TIGER/output/NY_map_roads_rails.pdf')
+plt.savefig('./Alpha - US_Census_TIGER/output/NY_map_roads_rails.png')
 
 # Show the plot
 plt.show()
@@ -116,7 +117,7 @@ plt.show()
 """
 create pdf page of sources and join to viz
 """
-doc = SimpleDocTemplate("./assignments/Alpha - US_Census_TIGER/output/NY_map_roads_rails_sources.pdf", pagesize=letter)
+doc = SimpleDocTemplate("./Alpha - US_Census_TIGER/output/NY_map_roads_rails_sources.pdf", pagesize=letter)
 styles = getSampleStyleSheet()
 story = []
 
@@ -146,12 +147,33 @@ doc.build(story)
 """
 combine pdfs
 """
-pdfs = ["./assignments/Alpha - US_Census_TIGER/output/NY_map_roads_rails.pdf", "./assignments/Alpha - US_Census_TIGER/output/NY_map_roads_rails_sources.pdf"]
+pdfs = ["./Alpha - US_Census_TIGER/output/NY_map_roads_rails.pdf", "./Alpha - US_Census_TIGER/output/NY_map_roads_rails_sources.pdf"]
 
 merger = PdfMerger()
 
 for pdf in pdfs:
     merger.append(pdf)
 
-merger.write("./assignments/Alpha - US_Census_TIGER/output/NY_map_roads_rails_combined.pdf")
+merger.write("./Alpha - US_Census_TIGER/output/NY_map_roads_rails_combined.pdf")
 merger.close()
+
+
+"""
+Save as html
+"""
+
+html_content = """
+<html>
+<head>
+    <title>New York State Map with Roads and Rails as of 2022</title>
+</head>
+<body>
+    <img src='./output/NY_map_roads_rails.png' alt='NY Map with Roads and Rails', width='1200' height='800'>
+
+</body>
+</html>
+"""
+
+# Save the HTML content to a file
+with open('./Alpha - US_Census_TIGER/NY_map_roads_rails.html', 'w') as file:
+    file.write(html_content)
