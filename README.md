@@ -7,10 +7,14 @@ Welcome to my Spatial Data Visualization Repository. This repository serves as a
 ## Links to Visualizations
 [New York State Roads and RailRoad Map Visualization](https://tadhglooram93.github.io/spacial_data_vis/Alpha%20-%20US_Census_TIGER/NY_map_roads_rails.html)
 
+[New York County Census Tract Density Map](https://tadhglooram93.github.io/spacial_data_vis/bravo_census_tract/NNY_map_census.html)
+
+
 ## Technologies Used
 
 - **ArcGIS**: A platform that enables the analysis, visualization, and management of spatial data.
 - **Python**: A versatile programming language used extensively for data analysis and manipulation.
+- **R**: A statistical prgramming language, supringly code a visualizing spatial data.
 - **JavaScript**: A programming language that facilitates the creation of interactive maps and data visualizations on web platforms.
 
 ## Features
