@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     const transitionBtn = document.getElementById('transitionBtn');
 
@@ -6,13 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
 function transitionToBarChart() {
     const svg = d3.select("#map");
-    const barWidth = 150;
+    const barWidth = 100;
     const totalBarHeight = 500;
-    const targetX = 0;
-    const targetY = 50;
+    const targetX = 20;
+    const targetY = 60;
 
     // Create a total water area rectangle
     const initialRect = svg.append('rect')
@@ -25,7 +25,7 @@ function transitionToBarChart() {
 
     // Transition for the initial rectangle to grow to its full height
     initialRect.transition()
-        .duration(1000) // 1 second duration
+        .duration(2000) // 1 second duration
         .attr('height', totalBarHeight);
 
     // Create a total water area text above the rectangle
@@ -33,74 +33,83 @@ function transitionToBarChart() {
         .attr('x', targetX + barWidth / 2)
         .attr('y', targetY - 5)
         .attr('text-anchor', 'middle')
-        .text('Total Storm Water');
+        .text('% Total Water Area');
 
-    const waterInParksTransition = 1500;
-    const delayBetweenTransitions = 1000;
+    const waternotinParksTransition = 2200 ;
+    const waterInParksTransition = 4000;
 
     // Define separate transition functions for water in parks and water not in parks
-    transitionShape('.water-in-parks', totalBarHeight * 0.05, targetY,waterInParksTransition);
-    transitionShape('.water-not-in-parks', totalBarHeight * 0.95, targetY + totalBarHeight * 0.05,delayBetweenTransitions);
+    transitionShape('.water-in-parks', totalBarHeight * 0.05, targetY,waterInParksTransition,fill="lightblue");
+    transitionShape('.water-not-in-parks', totalBarHeight * 0.95, targetY + totalBarHeight * 0.05,waternotinParksTransition,fill="#088F8F");
 
     function transitionShape(selector, targetHeight, targetY, delay) {
+        // Create a single text element
+        const textElement = svg.append('text')
+            .attr('x', targetX + barWidth / 2)
+            .attr('y', targetY + targetHeight / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'black');
+
         d3.selectAll(selector).each(function (d) {
             const currentElement = d3.select(this);
-            const currentPath = currentElement.attr('d');
 
-            // Create a new path element on top of the current one
-            const newPathElement = svg.append('path')
-                .attr('d', currentPath)
-                .attr('class', currentElement.attr('class'))
-                .attr('fill', currentElement.attr('fill'));
+            // Calculate the initial position and size of the element
+            const bbox = currentElement.node().getBBox();
+            const initialX = bbox.x;
+            const initialY = bbox.y;
+            const initialWidth = bbox.width;
+            const initialHeight = bbox.height;
 
-            // Transition the new path element
-            newPathElement.transition()
+            // Create a new rectangle element on top of the current one with the same fill color
+            const newRect = svg.append('rect')
+                .attr('x', initialX)
+                .attr('y', initialY)
+                .attr('width', initialWidth)
+                .attr('height', initialHeight)
+                .attr('fill', fill) // Apply the same fill color
+                .attr('class', currentElement.attr('class'));
+
+            // Transition the new rectangle element
+            newRect.transition()
                 .delay(delay)
-                .duration(1300)
-                .attrTween('d', function (d) {
-                    const targetPath = `M${targetX} ${targetY} H${targetX + barWidth} V${targetY + targetHeight} H${targetX} Z`;
-                    return d3.interpolateString(currentPath, targetPath);
-                })
-                .on('start', function(d, i) {
-                    // Get the bounding box of the current element before the transition starts
-                    const bbox = this.getBBox();
-
-                    // Calculate a new, smaller size and a new position closer to the target
-                    const adjustedX = d3.interpolate(bbox.x, targetX)(0.01);
-                    const adjustedY = d3.interpolate(bbox.y, targetY)(0.01);
-                    const adjustedWidth = d3.interpolate(bbox.width, barWidth)(0.01);
-                    const adjustedHeight = d3.interpolate(bbox.height, targetHeight)(0.01);
-
-                    // Set the initial size and position of the element to the adjusted values
-                    const path = d3.path();
-                    path.rect(adjustedX, adjustedY, adjustedWidth, adjustedHeight);
-                    d3.select(this).attr('d', path.toString());
-                })
-                .on('end', function (d, i) {
-                    // Remove the original path element and the new path element
+                .duration(3500)
+                .attr('x', targetX)
+                .attr('y', targetY)
+                .attr('width', barWidth)
+                .attr('height', targetHeight)
+                .on('start', function () {
+                    // Remove the current element at the start of the transition
                     currentElement.remove();
-                    // d3.select(this).remove();
-
-                    // Append rectangle
-                    svg.append('rect')
-                        .attr('x', targetX)
-                        .attr('y', targetY)
-                        .attr('width', barWidth)
-                        .attr('height', targetHeight)
-                        .attr('fill', selector === '.water-in-parks' ? 'cyan' : '#088F8F')
-                        .attr('stroke', 'black');
-
-                    // Append text inside rectangle
-                    const textPercentage = selector === '.water-in-parks' ? '5%' : '95%';
-                    svg.append('text')
-                        .attr('x', targetX + barWidth / 2)  // centering the text inside the rectangle
-                        .attr('y', targetY + targetHeight / 2)  // centering the text inside the rectangle
-                        .attr('dy', '0.35em')  // to vertically center the text
-                        .attr('text-anchor', 'middle')  // to horizontally center the text
-                        .text(textPercentage)
-                        .attr('fill', 'black');  // text color
+                })
+                .on('end', function () {
                 });
         });
     }
 
+    // Create and add text after all transitions are complete
+    const textPercentage = [
+        { selector: '.water-in-parks', percentage: '5%' },
+        { selector: 'water-not-in-parks', percentage: '95%' },
+    ];
+
+    textPercentage.forEach((item) => {
+        const rectHeight = item.selector === '.water-in-parks' ? totalBarHeight * 0.05 : totalBarHeight * 0.95;
+        const rectY = item.selector === '.water-in-parks' ? targetY : targetY + totalBarHeight * 0.05;
+        const textY = rectY + rectHeight / 2;
+
+        svg.append('text')
+            .attr('x', targetX + barWidth / 2)
+            .attr('y', textY)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'black')
+            .text(item.percentage)
+            .style('opacity', 0) // Set initial opacity to 0
+            .transition()
+            .delay(6000) // Delay before the transition starts
+            .duration(1000) // Transition duration
+            .style('opacity', 1); // Fade in
+    });
 }
+
