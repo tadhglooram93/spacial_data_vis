@@ -9,6 +9,8 @@ Welcome to my Spatial Data Visualization Repository. This repository serves as a
 
 [New York County Census Tract Density Map](https://tadhglooram93.github.io/spacial_data_vis/bravo_census_tract/NY_map_census.html)
 
+[Capetown Water Area Interactive Map](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index.html)
+
 ## Technologies Used
 
 - **ArcGIS**: A platform that enables the analysis, visualization, and management of spatial data.
