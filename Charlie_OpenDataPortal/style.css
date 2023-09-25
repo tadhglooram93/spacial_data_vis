@@ -1,0 +1,57 @@
+path.regions {
+    stroke: black;
+    fill: none;
+    stroke-width: 0.3;
+}
+
+path.water-in-parks {
+    fill: cyan;
+}
+
+path.water-not-in-parks {
+    fill: #088F8F;
+}
+
+path.parks-minus-water {
+    fill: darkgreen;
+}
+path {
+    vector-effect: non-scaling-stroke;
+}
+
+#title {
+    text-align: left;
+    font-family: "Courier New";
+    font-size: 24px; /* or another appropriate font-size */
+    font-weight: bold;
+}
+
+#subtitle {
+    text-align: left;
+    font-family: "Courier New";
+    font-size: 18px;
+}
+
+body {background-color: #F0FFFF	}
+
+#button-container {
+    margin-top: 20px; /* Adjust margin as per your needs */
+}
+
+#transitionBtn {
+    background-color: #F0F8FF; /* Green background */
+    border-radius: 12px;
+    color: black; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Some padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: inline-block; /* Make it inline-block */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    transition-duration: 0.4s; /* Add animation when hovered */
+}
+
+#transitionBtn:hover {
+    background-color: #F0F8FF; /* White background color on hover */
+    color: black; /* Black text color on hover */
+}

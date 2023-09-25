@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geo Visualization</title>
+    <link rel="stylesheet" href="style.css">
+<body>
+    <div id="title">Capetown, stormwater water areas and Parks</div>
+    <div id="subtitle">Hard to tell just by looking at the map... click the animate button!</div>
+    <div id="container">
+        <div id="button-container">
+            <button id="transitionBtn">Animate!</button>
+        </div>
+        <div>
+            <svg id="map" width="800" height="600"></svg>
+        </div>
+        <div
+                id="legend-container">
+        </div>
+    </div>
+
+    <script src="functions.js"></script>
+    <script src="transition.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+</body>
+</html>
