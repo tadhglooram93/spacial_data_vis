@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CapeTown Viz 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="title">How Far Is the Closest Park To a Bus Stop ? </div>
+  <div class="subtitle">hard to tell just by looking at the map... click the animate button!</div>
+  <div class = "container", id="container3">
+    <div class="button-container">
+      <button class="button" id="transitionBtn3">Animate!</button>
+    </div>
+    <div>
+      <svg id="map3" width="800" height="600"></svg>
+    </div>
+    <div
+            id="legend-container3">
+    </div>
+  </div>
+  <script src="map3.js"></script>
+  <script src="transition3.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+</body>
+</html>

@@ -11,6 +11,12 @@ Welcome to my Spatial Data Visualization Repository. This repository serves as a
 
 [Capetown Water Area Interactive Map](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index.html)
 
+[Capetown Bus Stops Intersecting Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index2.html)
+
+[Capetown Bus Stops Close to Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index3.html)
+
+[Capetown Bus Stops Close to Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index4.html)
+
 ## Technologies Used
 
 - **ArcGIS**: A platform that enables the analysis, visualization, and management of spatial data.
