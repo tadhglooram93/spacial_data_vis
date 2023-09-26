@@ -3,16 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const width = +svg.attr("width");
     const height = +svg.attr("height");
 
-    // Define the zoom behavior
-    const zoom = d3.zoom()
-        .scaleExtent([1, 500])
-        .on('zoom', (event) => {
-            g.attr('transform', event.transform);
-        });
-
-    // Apply the zoom behavior to the SVG
-    svg.call(zoom);
-
     // append a group element to SVG
     const g = svg.append('g');
 
@@ -57,7 +47,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const path = d3.geoPath(otherProjection);
 
-        // Water in Parks
+        // Slect the first feature from brt_buffer_inpark or brt_buffer_notinpark
+        const bufferFeature = brt_buffer_inpark.features[0]
+
+        // Get the corresponding brt_stop
+        const correspondingStop = getMatchingStop(bufferFeature);
+        // Use the coordinates of the corresponding brt_stop as the center of the circle
+        const bufferCentroid = otherProjection(correspondingStop.geometry.coordinates);
+        // Get any point on the bufferFeature polygon
+        const bufferPoint = otherProjection(bufferFeature.geometry.coordinates[0][0]);
+        // Calculate the distance between the center and the point on the polygon
+        const dx = bufferPoint[0] - bufferCentroid[0];
+        const dy = bufferPoint[1] - bufferCentroid[1];
+        const actualRadius = Math.sqrt(dx * dx + dy * dy);
+
+        // Perhaps you want to start with a larger radius initially.
+        let currentRadius = actualRadius * 70; // Change the multiplier as needed
+
+
+        //Parks
         g.selectAll('path.parks')
             .data(parks.features)
             .enter()
@@ -73,20 +81,25 @@ document.addEventListener("DOMContentLoaded", function() {
             .attr('d', path)
             .attr('class', 'water')
 
+        // Draw the circles with initial larger radius
         // brt buffer_notinpark
-        g.selectAll('path.brt_buffer_notinpark')
+        g.selectAll('circle.brt_buffer_notinpark')
             .data(brt_buffer_notinpark.features)
             .enter()
-            .append('path')
-            .attr('d', path)
+            .append('circle')
+            .attr('cx', d => otherProjection(getMatchingStop(d).geometry.coordinates)[0])
+            .attr('cy', d => otherProjection(getMatchingStop(d).geometry.coordinates)[1])
+            .attr('r', currentRadius) // set the initial larger radius here
             .attr('class', 'brt_buffer_notinpark')
 
         // brt buffer_inpark
-        g.selectAll('path.brt_buffer_inpark')
+        g.selectAll('circle.brt_buffer_inpark')
             .data(brt_buffer_inpark.features)
             .enter()
-            .append('path')
-            .attr('d', path)
+            .append('circle')
+            .attr('cx', d => otherProjection(getMatchingStop(d).geometry.coordinates)[0])
+            .attr('cy', d => otherProjection(getMatchingStop(d).geometry.coordinates)[1])
+            .attr('r', currentRadius) // set the initial larger radius here
             .attr('class', 'brt_buffer_inpark')
 
         // bert
@@ -98,11 +111,18 @@ document.addEventListener("DOMContentLoaded", function() {
             .attr('cy', d => otherProjection(d.geometry.coordinates)[1]) // y coordinate
             .attr('r', 0.01) // radius of the circle
             .attr('class', 'bert');
-
+        function getMatchingStop(bufferFeature) {
+            // Extract OBJECTId_left from bufferFeature
+            const objectIdLeft = bufferFeature.properties.OBJECTID_left;
+            // Find the corresponding stop in brt_stops where OBJECTID matches objectIdLeft
+            return brt_stops.features.find(stop => stop.properties.OBJECTID === objectIdLeft);
+        }
 
     });
     createLegend2()
 });
+
+
 function createLegend2() {
     const legendContainer = d3.select('#legend-container2');
 
@@ -140,13 +160,6 @@ function createLegend2() {
                 .attr('cy', legendItemHeight / 2)
                 .attr('r', legendItemWidth / 2)
                 .attr('fill', d.color);
-
-            // Append smaller white dot in the middle of the circle
-            item.append('circle')
-                .attr('cx', legendItemWidth / 2)
-                .attr('cy', legendItemHeight / 2)
-                .attr('r', legendItemWidth / 6) // Smaller radius for the white dot
-                .attr('fill', 'white');
         }
     });
 

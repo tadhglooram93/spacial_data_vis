@@ -15,7 +15,7 @@ Welcome to my Spatial Data Visualization Repository. This repository serves as a
 
 [Capetown Bus Stops Close to Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index3.html)
 
-[Capetown Bus Stops Close to Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index4.html)
+[Captown suburbs and Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index4.html)
 
 ## Technologies Used
 
