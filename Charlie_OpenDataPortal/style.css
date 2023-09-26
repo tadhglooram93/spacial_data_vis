@@ -5,7 +5,7 @@ path.regions {
 }
 
 path.water-in-parks {
-    fill: cyan;
+    fill: lightblue;
 }
 
 path.water-not-in-parks {
@@ -13,20 +13,56 @@ path.water-not-in-parks {
 }
 
 path.parks-minus-water {
-    fill: darkgreen;
+    fill: 	#48b07b;
 }
+
+path.parks {
+    fill: #48b07b;
+    opacity: 0.7;
+}
+
+path.water{
+    fill: white;
+    opacity: 0;
+}
+circle.brt_buffer_inpark {
+    fill: #F88379;
+    opacity:0.7;
+    stroke: black ;
+}
+
+circle.brt_buffer_notinpark {
+    fill: #E5E4E2	;
+    opacity: 0.7;
+    stroke: black	 ;
+}
+
+circle.brt_buffer_inpark2{
+    fill: #F88379;
+    opacity:0.7;
+    stroke: black ;
+}
+
+circle.brt_buffer_notinpark2 {
+    fill: #E5E4E2	;
+    opacity: 0.7;
+    stroke: black	 ;
+}
+
+
+
 path {
     vector-effect: non-scaling-stroke;
 }
 
-#title {
+.title {
     text-align: left;
     font-family: "Courier New";
     font-size: 24px; /* or another appropriate font-size */
     font-weight: bold;
 }
 
-#subtitle {
+.subtitle {
     text-align: left;
     font-family: "Courier New";
     font-size: 18px;
@@ -34,12 +70,12 @@ path {
 
 body {background-color: #F0FFFF	}
 
-#button-container {
+.button-container {
     margin-top: 20px; /* Adjust margin as per your needs */
 }
 
-#transitionBtn {
-    background-color: #F0F8FF; /* Green background */
+.button {
+    background-color: #F0F8FF; /
     border-radius: 12px;
     color: black; /* White text color */
     border: none; /* Remove border */
@@ -54,4 +90,8 @@ body {background-color: #F0FFFF	}
 #transitionBtn:hover {
     background-color: #F0F8FF; /* White background color on hover */
     color: black; /* Black text color on hover */
+}
+
+.container {
+    margin-bottom: 150px;
 }
