@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const g = svg.append('g');
 
     Promise.all([
-        d3.json('https://raw.githubusercontent.com/tadhglooram93/spacial_data_vis/main/Charlie_OpenDataPortal/data/regions_3395.geojson'),
-        d3.json('https://raw.githubusercontent.com/tadhglooram93/spacial_data_vis/main/Charlie_OpenDataPortal/data/parks_3395.geojson'),
-        d3.json('https://raw.githubusercontent.com/tadhglooram93/spacial_data_vis/main/Charlie_OpenDataPortal/data/waters_3395.geojson'),
-        d3.json('https://raw.githubusercontent.com/tadhglooram93/spacial_data_vis/main/Charlie_OpenDataPortal/data/bert_3395_circles_inpark.geojson'),
-        d3.json('https://raw.githubusercontent.com/tadhglooram93/spacial_data_vis/main/Charlie_OpenDataPortal/data/bert_3395_circles_notinpark.geojson'),
-        d3.json('https://raw.githubusercontent.com/tadhglooram93/spacial_data_vis/main/Charlie_OpenDataPortal/data/bert_3395.geojson')
+        d3.json('data/regions_3395.geojson'),
+        d3.json('data/parks_3395.geojson'),
+        d3.json('data/waters_3395.geojson'),
+        d3.json('data/bert_3395_circles_inpark.geojson'),
+        d3.json('data/bert_3395_circles_notinpark.geojson'),
+        d3.json('data/bert_3395.geojson')
 
     ]).then(([regionsData, parks, water, brt_buffer_inpark,brt_buffer_notinpark,brt_stops]) => {
 
