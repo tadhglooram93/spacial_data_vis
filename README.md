@@ -17,7 +17,7 @@ Welcome to my Spatial Data Visualization Repository. This repository serves as a
 
 [Captown suburbs and Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index4.html)
 
-[Isochrones of Bus Stops and Clinics in Manila](https://tadhglooram93.github.io/spacial_data_vis/delat_openstreetmap/index.html)
+[Isochrones of Bus Stops and Clinics in Manila](https://tadhglooram93.github.io/spacial_data_vis/delta_openstreetmap/index.html)
 
 
 ## Technologies Used
