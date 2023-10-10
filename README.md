@@ -17,6 +17,8 @@ Welcome to my Spatial Data Visualization Repository. This repository serves as a
 
 [Captown suburbs and Parks Interactive Viz](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/index4.html)
 
+[Captown Maps Combined](https://tadhglooram93.github.io/spacial_data_vis/Charlie_OpenDataPortal/html_combined.html)
+
 [Isochrones of Bus Stops and Clinics in Manila](https://tadhglooram93.github.io/spacial_data_vis/delta_openstreetmap/index.html)
 
 [GeoTagged Photos and GPS Traces - Beacon Hill](https://tadhglooram93.github.io/spacial_data_vis/echo_field_day/beacon_hill_map.html)
