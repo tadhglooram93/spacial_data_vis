@@ -41,7 +41,7 @@ with open("echo_field_day/tracks.gpx", "r") as gpx_file:
 
 
 # Load images and extract coordinates
-folder_path = "/Users/tadhglooramcoinmetrics/Harvard/g2_sem1/VIS-2128/echo_field_day/images/"
+folder_path = "./echo_field_day/images/"
 image_files = [f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))]
 coordinates = []
 
@@ -78,7 +78,7 @@ for coord, image_file in coordinates:
         {title}
     </div>
     <div style="width:400px;">
-        <img src="{os.path.join(folder_path, image_file)}" width="400">
+        <img src="./images/{image_file}" width="400">
         <div style="text-align:left; font-size:12px; font-family: 'Optima', sans-serif;">
             {description}
         </div>
