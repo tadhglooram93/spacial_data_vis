@@ -3,6 +3,9 @@ from PIL.ExifTags import TAGS, GPSTAGS
 import folium
 import gpxpy.gpx
 import os
+import base64
+from folium import IFrame
+
 
 #helper functions
 def get_geotagging(exif):
@@ -29,6 +32,12 @@ def get_coordinates(geotags):
     lon = (lon[0] + lon[1] / 60 + lon[2] / 3600) * (1 if geotags['GPSLongitudeRef'] == 'E' else -1)
 
     return lat, lon
+
+def image_to_base64(img_path):
+    with open(img_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode('utf-8')
+    return f"data:image/jpeg;base64,{encoded}"
+
 
 #load tracks
 with open("echo_field_day/tracks.gpx", "r") as gpx_file:
@@ -63,22 +72,23 @@ descriptions = {
 # Base folium plot Visualize with Folium
 m = folium.Map(location=[42.3562, -71.0694], zoom_start=17,tiles='cartodbpositron')  # Initial map centered on Boston
 
-# # Add new base layer
-# folium.TileLayer(f'cartodbpositron').add_to(m)
-
 # Add GPX track as a polyline
 folium.PolyLine(points, color="#9e6b90", weight=3, opacity=1).add_to(m)
+
+# relative_path = "/Users/tadhglooramcoinmetrics/Harvard/g2_sem1/VIS-2128/echo_field_day/images/"
 
 # plot symboles for location visited and images as pop ups
 for coord, image_file in coordinates:
     title = descriptions[image_file][0]
     description = descriptions[image_file][1]
+    encoded_image = base64.b64encode(open(os.path.join(folder_path, image_file),'rb').read()).decode('utf-8')
+
     popup_content = f'''
     <div style="text-align:center; font-weight:bold; font-size:15px; font-family: 'Optima', sans-serif;">
         {title}
     </div>
     <div style="width:400px;">
-        <img src="./images/{image_file}" width="400">
+        <img src="data:image/jpeg;base64,{encoded_image}" width="400px">
         <div style="text-align:left; font-size:12px; font-family: 'Optima', sans-serif;">
             {description}
         </div>
@@ -89,7 +99,7 @@ for coord, image_file in coordinates:
     folium.Marker(
         location=coord,
         popup=popup,
-        icon=folium.CustomIcon(icon_image="./echo_field_day/location.png", icon_size=(30,30))
+        icon=folium.CustomIcon(icon_image=f"./echo_field_day/location.png", icon_size=(30,30))
     ).add_to(m)
 
 
