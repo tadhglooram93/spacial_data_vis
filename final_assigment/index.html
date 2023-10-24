@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Navigation</title>
+  <style>
+    .nav-buttons {
+      position: fixed;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .nav-buttons a {
+      margin: 0 10px;
+      font-size: 24px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;  /* To avoid any unwanted scrollbars */
+    }
+    body {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    #mapFrame {
+      display: block;  /* This removes any extra space around the iframe */
+      width: 100%;
+      height: 85%;
+      border: none;  /* To remove any default borders */
+    }
+  </style>
+</head>
+<body>
+
+<iframe id="mapFrame" src="map0.html" width="100%" height="100%" frameborder="0"></iframe>
+
+<div class="nav-buttons">
+  <a id="leftArrow" href="#" onclick="navigate(-1)">◀</a>
+  <a id="rightArrow" href="#" onclick="navigate(1)">▶</a>
+</div>
+
+<script>
+  let currentMap = 0;
+  const totalMaps = 5;
+
+  function navigate(direction) {
+    currentMap += direction;
+    if (currentMap < 0) {
+      currentMap = 0;
+    } else if (currentMap > totalMaps) {
+      currentMap = totalMaps;
+    }
+    document.getElementById('mapFrame').src = 'map' + currentMap + '.html';
+    updateArrows();
+  }
+
+  function updateArrows() {
+    document.getElementById('leftArrow').style.visibility = (currentMap === 0) ? 'hidden' : 'visible';
+    document.getElementById('rightArrow').style.visibility = (currentMap === totalMaps) ? 'hidden' : 'visible';
+  }
+
+  window.onload = updateArrows;
+</script>
+
+</body>
+</html>

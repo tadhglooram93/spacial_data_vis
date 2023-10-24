@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* Styles for the container and cells */
+        .container {
+            display: grid;
+            grid-template-rows: auto auto; /* Two rows */
+            gap: 20px; /* Gap between rows */
+            padding: 5px;
+            max-width: 1200px;
+            margin: 0 auto; /* Center the container */
+        }
+
+        .image-cell img {
+            max-width: 100%; /* Make sure the image doesn't overflow the container */
+            height: auto;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <!-- Top cell with description -->
+    <div class="description-cell">
+        <p>
+           As we saw from the previous slide there Lots of restaurants to choose from, let's filter some out some restaurant based on where the crowd is!
+            By diving into plots showcasing the spread of Vietnamese residents, we'll zoom in on areas with 500 or more locals.
+            Navigate to the next slide to find some restaurants located there!
+        </p>
+    </div>
+
+    <!-- Bottom cell with image -->
+    <div class="image-cell">
+        <img src="dist_plot.png" alt="Distribution Plot">
+    </div>
+</div>
+</body>
+</html>
